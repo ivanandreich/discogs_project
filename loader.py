@@ -102,10 +102,10 @@ def start_execution(config):
     try:
         pathj = prepare_directory_for_dataset(config_connector['path']['dataset'], '1.json')
         joined_file = open_joined_file(pathj)
-        for release_id in range(int(config_connector['nums']['start_id']), int(config_connector['nums']['num_records']) + 1):
+        for release_id in range(int(config_connector['nums']['start_id']), int(config_connector['nums']['num_records']) + int(config_connector['nums']['start_id'])):
             res = establish_connection(config_connector['url']['source'], release_id, headers)
             r = make_headers(res)
-            if (release_id - 1) % int(config_connector['nums']['num_in_file']) == 0 and release_id != int(config_connector['nums']['start_id']):
+            if (release_id - int(config_connector['nums']['start_id'])) % int(config_connector['nums']['num_in_file']) == 0 and release_id != int(config_connector['nums']['start_id']):
                 write_in_joined_file(joined_file, joined_data)
                 i = i + 1
                 pathj = prepare_directory_for_dataset(config_connector['path']['dataset'], str(i + 1) + '.json')
