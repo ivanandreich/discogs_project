@@ -3,10 +3,8 @@ import os
 import psycopg2
 import configparser
 import requests
-import pathlib
 import time
 from pathlib import Path
-import sys
 from user_agent import generate_user_agent
 
 
@@ -131,15 +129,6 @@ def drop_table_dataset():
 
 def truncate_table_dataset():
     cur.execute('''TRUNCATE TABLE dataset''')
-
-
-def create_table_releases():
-    cur.execute('''CREATE TABLE IF NOT EXISTS releases
-        (id integer NOT NULL PRIMARY KEY,
-        title text NOT NULL,
-        country text NOT NULL,
-        genres text NOT NULL,
-        year integer NOT NULL);''')
 
 
 def create_table_dataset():
